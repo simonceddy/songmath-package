@@ -26,6 +26,8 @@ function makeOctaveRange(min, max) {
 
   const notes = [];
 
+  const noteFreqs = [];
+
   for (let i = 0; i < totalSteps; i++) {
     const currentLoopOctave = Math.floor(i / this.scale.length);
 
@@ -35,11 +37,20 @@ function makeOctaveRange(min, max) {
 
     const currentNote = this.scale[key];
 
+    const hz = this.frequencyCalc.calculateStepHz(currentStep);
+
     notes.push({
-      note: `${currentNote}${currentOctave}`,
+      fullNote: `${currentNote}${currentOctave}`,
+      octave: currentOctave,
+      note: currentNote,
       step: i,
-      hz: this.frequencyCalc.calculateStepHz(currentStep)
+      hz
     });
+
+    if (!noteFreqs[currentOctave]) noteFreqs[currentOctave] = [];
+
+    noteFreqs[currentOctave][currentNote] = hz;
+
     currentStep++;
   }
 

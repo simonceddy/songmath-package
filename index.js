@@ -1,5 +1,5 @@
-const ScaleCalculator = require('./ScaleCalculator');
+const ScaleBuilder = require('./ScaleBuilder');
 
-const calc = new ScaleCalculator();
+const scale = new ScaleBuilder();
 
-console.log(calc.calculateOctaveRange(2, 6));
+console.log(scale.makeOctaveRange(2, 6));

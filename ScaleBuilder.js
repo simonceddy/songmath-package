@@ -1,7 +1,7 @@
 const { WesternChromaticScale } = require('./scales');
 const FrequencyCalculator = require('./FrequencyCalculator');
 
-function ScaleCalculator(frequencyCalc, options = {}) {
+function ScaleBuilder(frequencyCalc, options = {}) {
   this.referenceNote = options.referenceNote || 'A';
 
   this.scale = options.scale || WesternChromaticScale;
@@ -13,7 +13,7 @@ function ScaleCalculator(frequencyCalc, options = {}) {
   this.frequencyCalc = frequencyCalc || new FrequencyCalculator();
 }
 
-function calculateOctaveRange(min, max) {
+function makeOctaveRange(min, max) {
   const totalOctaves = min < max ? max - min + 1 : 1;
 
   const totalSteps = totalOctaves * this.scale.length;
@@ -46,11 +46,11 @@ function calculateOctaveRange(min, max) {
   return notes;
 }
 
-function calculatePiano() {
-  return this.calculateOctaveRange(0, 8);
+function makePiano() {
+  return this.makeOctaveRange(0, 8);
 }
 
-ScaleCalculator.prototype.calculateOctaveRange = calculateOctaveRange;
-ScaleCalculator.prototype.calculatePiano = calculatePiano;
+ScaleBuilder.prototype.makeOctaveRange = makeOctaveRange;
+ScaleBuilder.prototype.makePiano = makePiano;
 
-module.exports = ScaleCalculator;
+module.exports = ScaleBuilder;

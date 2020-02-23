@@ -1,5 +1,5 @@
-const FrequencyCalculator = require('./FrequencyCalculator');
+const ScaleCalculator = require('./ScaleCalculator');
 
-const calc = new FrequencyCalculator();
+const calc = new ScaleCalculator();
 
-console.log(calc.calculateStepHz());
+console.log(calc.calculateOctaveRange(2, 6));

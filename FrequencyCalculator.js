@@ -9,14 +9,14 @@ const Fraction = require('fraction.js/fraction');
  *
  * @param {number} referenceHz The reference frequency to base calculations on. Default is 440
  * @param {number} precision The decimal precision of returned values. Default is 3
- * @param {object} options Options passed to the constructor
+ * @param {object} options Options passed to the constructor - does nothing atm
  */
-function FrequencyCalculator(referenceHz = 440, precision = 3, options = {}) {
+function FrequencyCalculator(options = {}) {
   if (!(this instanceof FrequencyCalculator)) {
-    return new FrequencyCalculator(referenceHz, precision, options);
+    return new FrequencyCalculator(options);
   }
-  this.referenceHz = new Fraction(referenceHz);
-  this.precision = precision;
+  this.referenceHz = new Fraction(options.referenceHz || 440);
+  this.precision = options.precision || 3;
 
   this.twelthRootOfTwo = 2 ** (1 / 12);
 }

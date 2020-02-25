@@ -1,5 +1,5 @@
 const ScaleBuilder = require('./ScaleBuilder');
+const FrequencyCalculator = require('./FrequencyCalculator');
 
-const scale = new ScaleBuilder();
-
-console.log(scale.makeOctaveRange(2, 6));
+module.exports.ScaleBuilder = ScaleBuilder;
+module.exports.FrequencyCalculator = FrequencyCalculator;

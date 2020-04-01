@@ -14,7 +14,7 @@ function ScaleBuilder(frequencyCalc, options = {}) {
 }
 
 function makeOctaveRange(min, max) {
-  const totalOctaves = min < max ? max - min + 1 : 1;
+  const totalOctaves = (!min || min < max) ? max - min + 1 : 1;
 
   const totalSteps = totalOctaves * this.scale.length;
 
@@ -24,9 +24,9 @@ function makeOctaveRange(min, max) {
 
   let currentStep = firstStep;
 
-  // const notes = [];
+  const notes = [];
 
-  const noteFreqs = [];
+  // const noteFreqs = [];
 
   for (let i = 0; i < totalSteps; i++) {
     const currentLoopOctave = Math.floor(i / this.scale.length);
@@ -39,29 +39,35 @@ function makeOctaveRange(min, max) {
 
     const hz = this.frequencyCalc.calculateStepHz(currentStep);
 
-    /* notes.push({
+    notes.push({
       fullNote: `${currentNote}${currentOctave}`,
       octave: currentOctave,
       note: currentNote,
       step: i,
       hz
-    }); */
+    });
 
-    if (!noteFreqs[currentOctave]) noteFreqs[currentOctave] = [];
+    // if (!noteFreqs[currentOctave]) noteFreqs[currentOctave] = [];
 
-    noteFreqs[currentOctave][currentNote] = hz;
+    // noteFreqs[currentOctave][currentNote] = hz;
 
     currentStep++;
   }
 
-  return noteFreqs;
+  // return noteFreqs;
+  return notes;
 }
 
 function makePiano() {
   return this.makeOctaveRange(0, 8);
 }
 
+function makeOctave(octave) {
+  return this.makeOctaveRange(octave);
+}
+
 ScaleBuilder.prototype.makeOctaveRange = makeOctaveRange;
 ScaleBuilder.prototype.makePiano = makePiano;
+ScaleBuilder.prototype.makeOctave = makeOctave;
 
 module.exports = ScaleBuilder;
